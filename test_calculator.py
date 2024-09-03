@@ -9,4 +9,7 @@ assert add("//;\n1;2") == 3
 try:
     add("-1,2,-3")
 except NegativeNumberException as e:
-    assert str(e) == "negative numbers not allowed: -1,-3"
+    assert str(e) == "negative numbers not allowed: -1, -3"
+    
+assert add("2,1001") == 2
+

@@ -18,5 +18,5 @@ def add(numbers: str) -> int:
     if negatives:
         raise NegativeNumberException(f"negative numbers not allowed: {', '.join(map(str, negatives))}")
 
-    num_list = map(int, num_list)
+    num_list = map(int, filter(lambda x: int(x) <= 1000, num_list))
     return sum(num_list)
