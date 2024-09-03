@@ -1,3 +1,6 @@
+class NegativeNumberException(Exception):
+    pass
+
 def add(numbers: str) -> int:
     if numbers == "":
         return 0
@@ -6,11 +9,14 @@ def add(numbers: str) -> int:
         delimiter_index = numbers.index("\n")
         delimiter = numbers[2:delimiter_index]
         numbers = numbers[delimiter_index + 1:]
-        num_list = map(int, numbers.split(delimiter))
+        num_list = numbers.split(delimiter)
     else:
         numbers = numbers.replace("\n", ",")
-        num_list = map(int, numbers.split(','))
+        num_list = numbers.split(',')
     
-    return sum(num_list)
+    negatives = [int(num) for num in num_list if int(num) < 0]
+    if negatives:
+        raise NegativeNumberException(f"negative numbers not allowed: {', '.join(map(str, negatives))}")
 
-print(add("//;\n1;2"))
+    num_list = map(int, num_list)
+    return sum(num_list)
